@@ -1,0 +1,33 @@
+   public DB_HELPER(MainActivity mainActivity, Object o, Context context, int i){
+        super(context,DB_NAME,null,1);
+      
+
+    }
+    @Override
+    public void onCreate(SQLiteDatabase db) {}
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        }
+
+
+    public List<DB_class> grabvalues(String V){
+        SQLiteDatabase db= getReadableDatabase();
+        SQLiteQueryBuilder qb=new SQLiteQueryBuilder();
+        String[] SqlSelect={"NAME","PORTION","CARBS"};
+        qb.setTables(Table_Name);
+        Cursor cursor= qb.query(db,SqlSelect,"NAME =",new String[]{V},null,null,null);
+        List<DB_class> result =new ArrayList<>();
+        if (cursor.moveToFirst()){
+            do{
+                DB_class foood=new DB_class();
+                foood.setName(cursor.getString(cursor.getColumnIndex(Name)));
+                foood.setPortion(cursor.getString(cursor.getColumnIndex(portion)));
+                foood.setCarbs(cursor.getString(cursor.getColumnIndex(carbs)));
+                result.add(foood);
+
+            }while(cursor.moveToNext());
+        }
+        return result;
+    }
+}
