@@ -1,0 +1,15 @@
+public void loadvalues(View view) {
+        viewresult = (TextView) findViewById(R.id.viewresult);
+        searchfor = (TextView) findViewById(R.id.searchfor);
+        testing1 = (TextView) findViewById(R.id.testing1);
+        testing2 = (TextView) findViewById(R.id.testing2);
+        testing3 = (TextView) findViewById(R.id.testing3);
+        btnload = (Button) findViewById(R.id.btnload);
+        String v = searchfor.getText().toString();
+        testing1.setText(v);
+        DB_HELPER db_helper = new DB_HELPER(this, null, null, 1);
+        testing2.setText(db_helper.why(v));
+        testing3.setText("DB CALLED BUT ERROR IN THE TEXT LOADING");
+          viewresult.setText(db_helper.loadvalues());
+        searchfor.setText("");
+    }
